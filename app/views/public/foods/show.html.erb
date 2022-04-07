@@ -1,0 +1,30 @@
+<% @foods.each do |food| %>
+          <div class="col-md-3 col-sm-3 my-3">
+            <%= link_to food_path(food.code) do %>
+              <%#= image_tag food.image, class: "food-image" %><br>
+
+             <strong><%= food.code %></strong><br>
+            <% end %>
+           </div>
+           <!-- model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
+           <%= form_with model: Comment.new ,url: food_comments_path(Food.last), method: :post do |f| %>
+              <div class="field">
+                <%= f.label :impression %>
+                <%= f.text_field :impression %>
+              </div>
+              <div class="field">
+                <%= f.label :name %>
+                <%= f.hidden_field :item_code, :value=> food.code %>
+              </div>
+
+
+              <div class="actions">
+                <%= f.submit %>
+              </div>
+           <% end %>
+           <!-- アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
+           <% Comment.all.each do |comment| %>
+            <%= comment.impression %>
+           <% end %>
+
+          <% end %>

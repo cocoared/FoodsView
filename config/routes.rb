@@ -14,6 +14,16 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
+  #ゲストユーザー用
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
+
+ root to: 'homes#top'
+
+
+
   namespace :admin do
     resources :foods, only: [:index, :show] do
       resources :comments, only: [:create, :destroy]
@@ -24,7 +34,6 @@ Rails.application.routes.draw do
 
 
   scope module: "public" do
-    root to: 'homes#top'
     get  "/users/sign_out" => "sessions#destroy" #ログアウト
     get "/users/my_page" => "users#show" #ユーザー情報詳細ページ（マイページ）表示
     get "/users/unsubscribe" => "users#unsubscribe" #退会確認画面の表示

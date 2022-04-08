@@ -7,7 +7,7 @@
             <% end %>
            </div>
            <!-- model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
-           <%= form_with model: Comment.new ,url: food_comments_path(Food.last), method: :post do |f| %>
+           <%= form_with model: @comment ,url: food_comments_path(@food), method: :post do |f| %>
               <div class="field">
                 <%= f.label :impression %>
                 <%= f.text_field :impression %>
@@ -23,7 +23,7 @@
               </div>
            <% end %>
            <!-- アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
-           <% Comment.all.each do |comment| %>
+           <% @food.comments.each do |comment| %>
             <%= comment.impression %>
            <% end %>
 

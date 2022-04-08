@@ -19,6 +19,16 @@ class Public::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+  def guest_sign_in
+    user = User.guest
+    sign_in user #ゲストユーザーをログイン状態する。
+    flash[:notice] = 'ゲストユーザーでログインしました。'
+    redirect_to foods_path
+  end
+
+
+
+
 
   protected
 
@@ -33,7 +43,7 @@ class Public::SessionsController < Devise::SessionsController
     ## 【処理内容2】 取得したアカウントのパスワードと入力されたパスワードが一致してるかを判別
     if @user.valid_password?(params[:user][:password])
       ## 【処理内容3】
-      if @user.is_deletd == true
+      if @user.is_deleted == true
         flash[:alert] =  "退会済みのアカウントです。再度新規登録してください。"
         redirect_to new_user_registration_path
       else

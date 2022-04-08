@@ -3,7 +3,7 @@
     <div class="col-md-9 col-sm-9">
       <h4 class="bg-light text-center col-md-2 col-sm-2 my-3">食品一覧</h1>
       <div class="row">
-          <%= @foods.each do |food| %>
+          <% @foods.each do |food| %>
           <div class="col-md-3 col-sm-3 my-3">
             <%= link_to food_path(food.code) do %>
               <%#= image_tag food.image, class: "food-image" %><br>

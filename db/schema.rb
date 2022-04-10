@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2022_04_07_145541) do
     t.text "impression"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "item_code"
   end
 
   create_table "foods", force: :cascade do |t|
@@ -39,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_04_07_145541) do
     t.text "introduction"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "item_code"
+    t.string "item_code"
   end
 
   create_table "genres", force: :cascade do |t|

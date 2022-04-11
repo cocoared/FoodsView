@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :foods, only: [:index, :show, :create] do
       resources :comments, only: [:create, :destroy]
     end
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:edit, :update]
   end
 
 

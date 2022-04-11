@@ -7,7 +7,6 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = current_user
-    @post_image = @user.post_images
   end
 
   def edit
@@ -21,7 +20,7 @@ class Public::UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       flash[:notice] = "ユーザー情報を更新しました。"
-      redirect_to user_my_page_path(@user)
+      redirect_to users_my_page_path(@user)
     else
       flash.now[:alert] = "ユーザー情報を入力してください。"
       render :edit

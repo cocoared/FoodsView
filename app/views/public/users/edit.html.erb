@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4>ユーザー情報編集</h4>
+      <%= form_with(model:@user, local: true, method: :patch) do |f| %>
+        <label for="user_name">ニックネーム</label><br>
+        <%= f.text_field :name, autofocus: true, id:"user_name" %><br>
+        <label for="user_image">プロフィール画像</label><br>
+        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
+        <%= f.submit "保存する" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,20 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
 
+  def new
+    @user = User.new
+  end
+
   def show
     @user = current_user
+    @post_image = @user.post_images
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user != current_user
+     redirect_to user_path(current_user)
+    end
   end
 
   def update

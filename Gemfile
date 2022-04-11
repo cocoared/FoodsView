@@ -60,6 +60,6 @@ gem 'kaminari','~> 1.2.1' #ページネーションの追加
 gem 'dotenv-rails'
 
 
-# group :production do
-#   gem 'mysql2'
-# end
+group :production do
+  gem 'mysql2'
+end

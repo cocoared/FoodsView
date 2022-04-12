@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :profile_image
+  has_many :comments, dependent: :destroy
 
 
   def get_profile_image(width,height) #モデルに記述することでhtmlファイルにおいて　.get_profile_image というメソッド形式で呼び出せる。

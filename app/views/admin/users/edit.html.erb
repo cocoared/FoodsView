@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 mt-3 mb-4 offset-3">
+      <h4 class="bg-light text-center mt-3"><%= @user.name %>さんのユーザー情報</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-11 mt-3 offset-4">
+      <%= form_with model: @user, url: admin_user_path, local: true do |f| %>
+       <form>
+         <div class="form-group">
+           <%= f.label :id, "ユーザーID" %>
+           <%= @user.id %><br>
+           <%= f.label :ニックネーム　 %>
+           <%= f.text_field :name, autofocus: true %><br>
+
+           <%= f.label :メールアドレス %>
+           <%= f.text_field :email %><br>
+
+           <%= f.label :ユーザーステータス %><br>
+           <%= f.radio_button :is_deleted, false %>
+           <%= f.label :ユーザーステータス, "有効", value: false %>
+           <%= f.radio_button :is_deleted, true %>
+           <%= f.label :ユーザーステータス, "退会", value: true %><br>
+
+           <%= f.submit "変更を保存", class: "btn btn-success offset-3" %>
+         </div>
+       </form>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,7 @@
           </button>
           <div button class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+      <!--ユーザーログイン後のヘッダー-->
               <% if user_signed_in? %>
               <li>
                 <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
@@ -41,7 +42,7 @@
                  <i class="fa-solid fa-bowl-food"></i>食品一覧
                 <% end %>
               </li>
-<!--管理者ログイン後のヘッダー-->
+       <!--管理者ログイン後のヘッダー-->
               <% elsif admin_signed_in? %>
               <li>
                 <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>

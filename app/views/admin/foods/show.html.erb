@@ -1,0 +1,44 @@
+<%# @foods.each do |food| %>
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+    <%#= link_to food_path(food.code) do %>
+      <%= image_tag @food_detail["mediumImageUrls"][0], class: "food-image" %><br>
+      <strong><%#= food.code %></strong><br>
+    <%# end %>
+  </div>
+  <div class="col-md-9">
+    <%= @food_detail['itemCaption'] %>
+  </div>
+</div>
+
+
+
+  <h2>Comment</h2>
+  <%= form_with model: @comment, url: food_comments_path(params[:id]), method: :post do |f| %>
+    <%= f.label :impression %>
+    <%= f.text_area :impression, class: 'form-control' %>
+    <%= f.submit %>
+  <% end %>
+
+  <h3>Comments</h3>
+
+   <!--model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
+  <%#= form_with model: @comment ,url: food_comments_path(params[:id]), method: :post do |f| %>
+    <!--<div class="field">-->
+    <%#= f.label :impression %>
+    <%#= f.text_field :impression %>
+    <!--</div>-->
+    <!--<div class="field">-->
+    <%#= f.label :name %>
+    <%#= f.hidden_field :item_code, value: params[:id] %>
+    <!--</div>-->
+    <!--<div class="actions">-->
+    <%#= f.submit %>
+    <!--</div>-->
+   <%# end %>
+   <!--アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
+  <% @food.comments.each do |comment| %>
+    <%= simple_format(comment.impression) %>
+  <% end %>
+

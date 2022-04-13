@@ -1,7 +1,7 @@
 class Public::FoodsController < ApplicationController
 
   def index
-    @foods = RakutenWebService::Ichiba::Genre[100227].ranking
+    @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
     # @foods = RakutenWebService::Ichiba::Genre[100316].search(keyword:  'Ruby')
     # binding.irb
   end
@@ -9,8 +9,8 @@ class Public::FoodsController < ApplicationController
   def show
     # @foods = RakutenWebService::Ichiba::Item.search({itemCode: params[:id]})
     @food_detail = RakutenWebService::Ichiba::Item.search(itemCode: params[:id]).first
-    # @comment = Comment.new
     # @food = Food.new
+    @comments = @food_detail.comments
     @comment = Comment.new
     # @food_exist = Food.find_by(item_code: params[:id]) # Food ga create saretereba sono record wo syutoku !
 

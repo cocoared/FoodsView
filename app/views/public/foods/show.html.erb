@@ -22,13 +22,8 @@
   <% end %>
 
   <h3>Comments</h3>
-  <% @food_detail.comments.each do |comment| %>
-    <div>
-      <%= simple_format(comment.impression) %>
-    </div>
-  <% end %>
 
-  <!-- model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
+   <!--model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
   <%#= form_with model: @comment ,url: food_comments_path(params[:id]), method: :post do |f| %>
     <!--<div class="field">-->
     <%#= f.label :impression %>
@@ -42,10 +37,8 @@
     <%#= f.submit %>
     <!--</div>-->
    <%# end %>
-  <!-- アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
+   <!--アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
   <%# @food.comments.each do |comment| %>
-    <%#= comment.impression %>
+    <%#= simple_format(comment.impression) %>
   <%# end %>
 
-<%# end %>
-</div>

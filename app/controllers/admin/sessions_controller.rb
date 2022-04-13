@@ -24,4 +24,17 @@ class Admin::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  before_action :configure_permitted_parameters, if: :devise_controller? #deviseに関するコントローラーの処理であれば,実行されるように設定。
+
+  def after_sign_in_path_for(resource)
+    admin_foods_path
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in) #deviseのUserモデルに関わる「ログイン」「新規登録」などのリクエストからパラメーターを取得できるようになるメソッド。
+  end
+
 end

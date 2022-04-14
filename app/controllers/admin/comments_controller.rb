@@ -10,7 +10,7 @@ class Admin::CommentsController < ApplicationController
 
   def destroy
     Comment.find_by(id: params[:id], book_id: params[:food_id]).destroy
-    redirect_back(fallback_location: root_path)
+    redirect_to food_path(food.item_code)
   end
 
   private

@@ -5,7 +5,7 @@ class Public::CommentsController < ApplicationController
     comment.user_id = current_user.id
     comment.food_id = params[:food_id]
     comment.save
-    redirect_back(fallback_location: root_path) #直前のページへリダイレクト
+    redirect_to food_path(food.item_code)
     # binding.irb
   end
 

@@ -1,4 +1,3 @@
-<%# @foods.each do |food| %>
 <div class="container">
 <div class="row">
   <div class="col-md-3">
@@ -12,18 +11,36 @@
   </div>
 </div>
 
-
-
+<% if @food_exist.nil? %>
+  <h2>Food New</h2>
+  <%= form_with model: @food, url: foods_path(item_code: params[:id]), method: :post do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+    <%#= f.label :introduction %>
+    <%#= f.text_area :introduction, class: 'form-control' %>
+    <%= f.submit %>
+  <% end %>
+<% else %>
+  <h2>Food Info</h2>
+  <h3><%= @food_exist.name %></h3>
+  <!--<div>-->
+    <%#= simple_format(@food_exist.introduction) %>
+  <!--</div>-->
   <h2>Comment</h2>
-  <%= form_with model: @comment, url: food_comments_path(params[:id]), method: :post do |f| %>
+  <%= form_with model: @comment, url: food_comments_path(@food_exist.id), method: :post do |f| %>
     <%= f.label :impression %>
     <%= f.text_area :impression, class: 'form-control' %>
     <%= f.submit %>
   <% end %>
 
   <h3>Comments</h3>
-
-   <!--model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
+  <% @comments.each do |comment| %>
+    <div>
+      <%= simple_format(comment.impression) %>
+    </div>
+  <% end %>
+<% end %>
+  <!-- model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
   <%#= form_with model: @comment ,url: food_comments_path(params[:id]), method: :post do |f| %>
     <!--<div class="field">-->
     <%#= f.label :impression %>
@@ -37,8 +54,10 @@
     <%#= f.submit %>
     <!--</div>-->
    <%# end %>
-   <!--アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
-  <% @comments.each do |comment| %>
-    <%= simple_format(comment.impression) %>
-  <% end %>
+  <!-- アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
+  <%# @food.comments.each do |comment| %>
+    <%#= comment.impression %>
+  <%# end %>
 
+<%# end %>
+</div>

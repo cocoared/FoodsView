@@ -9,3 +9,12 @@ Admin.create!(
   email: "admin@a",
   password: "aaaaaa",
 )
+
+Tag.create!([
+    { name: '肉類' },
+    { name: '魚介類' },
+    { name: '野菜'},
+    { name: '調味料'},
+    { name: '麺類'},
+    { name: 'その他'}
+])

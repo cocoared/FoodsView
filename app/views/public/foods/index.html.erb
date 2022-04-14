@@ -7,12 +7,11 @@
           <div class="col-md-3 col-sm-4 my-3">
             <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
               <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
-
               <strong><%= food.name %></strong><br>
             <% end %>
            </div>
           <% end %>
-          <div class="text-right">
+          <div class='col'>
            <%= paginate @foods_page %>
           </div>
       </div>

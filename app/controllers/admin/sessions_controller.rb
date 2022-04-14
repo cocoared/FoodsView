@@ -34,7 +34,7 @@ class Admin::SessionsController < Devise::SessionsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_in) #deviseのUserモデルに関わる「ログイン」「新規登録」などのリクエストからパラメーターを取得できるようになるメソッド。
+    devise_parameter_sanitizer.permit(:sign_up) #deviseのUserモデルに関わる「ログイン」「新規登録」などのリクエストからパラメーターを取得できるようになるメソッド。
   end
 
 end

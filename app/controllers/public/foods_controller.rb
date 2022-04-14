@@ -3,7 +3,7 @@ class Public::FoodsController < ApplicationController
   def index
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
     arr = @foods.map {|food| food} #配列の形成
-    
+
     if params[:search].present?
       foods = food.items_serach(params[:search])
     elsif params[:tag_id].present?
@@ -14,11 +14,10 @@ class Public::FoodsController < ApplicationController
     end
     @tag_lists = Tag.all
     @foods_page = Kaminari.paginate_array(arr).page(params[:page]).per(10)
-    
-  end    
+
+  end
     # @foods = RakutenWebService::Ichiba::Genre[100316].search(keyword:  'Ruby')
     # binding.irb
-  end
 
   def show
     # @foods = RakutenWebService::Ichiba::Item.search({itemCode: params[:id]})

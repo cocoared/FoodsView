@@ -1,4 +1,4 @@
-class Public::FoodsController < ApplicationController
+class Admin::FoodsController < ApplicationController
 
   def index
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
@@ -23,7 +23,6 @@ class Public::FoodsController < ApplicationController
   end
     # @foods = RakutenWebService::Ichiba::Genre[100316].search(keyword:  'Ruby')
     # binding.irb
-  end
 
   def show
     # @foods = RakutenWebService::Ichiba::Item.search({itemCode: params[:id]})
@@ -47,7 +46,7 @@ class Public::FoodsController < ApplicationController
     # @food.genre_id = 1 # FIX ME
     @food.save
     # binding.irb
-    redirect_to food_path(params[:item_code])
+    redirect_to admin_food_path(params[:item_code])
   end
 
   private

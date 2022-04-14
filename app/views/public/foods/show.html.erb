@@ -1,10 +1,7 @@
 <div class="container">
 <div class="row">
   <div class="col-md-3">
-    <%#= link_to food_path(food.code) do %>
       <%= image_tag @food_detail["mediumImageUrls"][0], class: "food-image" %><br>
-      <strong><%#= food.code %></strong><br>
-    <%# end %>
   </div>
   <div class="col-md-9">
     <%= @food_detail['itemCaption'] %>
@@ -16,48 +13,24 @@
   <%= form_with model: @food, url: foods_path(item_code: params[:id]), method: :post do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
-    <%#= f.label :introduction %>
-    <%#= f.text_area :introduction, class: 'form-control' %>
-    <%= f.submit %>
-  <% end %>
-<% else %>
-  <h2>Food Info</h2>
-  <h3><%= @food_exist.name %></h3>
-  <!--<div>-->
-    <%#= simple_format(@food_exist.introduction) %>
-  <!--</div>-->
-  <h2>Comment</h2>
-  <%= form_with model: @comment, url: food_comments_path(@food_exist.id), method: :post do |f| %>
-    <%= f.label :impression %>
-    <%= f.text_area :impression, class: 'form-control' %>
     <%= f.submit %>
   <% end %>
 
-  <h3>Comments</h3>
+<% else %>
+  <h4><strong>品名</strong></h4>
+  <h5><%= @food_exist.name %></h5><br>
+
+  <h4><strong>コメント投稿</strong></h4>
+  <%= form_with model: @comment, url: food_comments_path(@food_exist.id), method: :post do |f| %>
+    <%#= f.label :impression %>
+    <%= f.text_area :impression, autofocus:true, class: 'form-control' %><br>
+    <%= f.submit "投稿"%>
+  <% end %><br>
+
+  <h4><strong>コメント一覧</strong></h4>
   <% @comments.each do |comment| %>
     <div>
       <%= simple_format(comment.impression) %>
     </div>
   <% end %>
 <% end %>
-  <!-- model: Comment.new →@commentに変更が必要,url: food_comments_path(Food.last)→Food.lastではなく@foodで保存されたFoodモデルの保存が必要| %> -->
-  <%#= form_with model: @comment ,url: food_comments_path(params[:id]), method: :post do |f| %>
-    <!--<div class="field">-->
-    <%#= f.label :impression %>
-    <%#= f.text_field :impression %>
-    <!--</div>-->
-    <!--<div class="field">-->
-    <%#= f.label :name %>
-    <%#= f.hidden_field :item_code, value: params[:id] %>
-    <!--</div>-->
-    <!--<div class="actions">-->
-    <%#= f.submit %>
-    <!--</div>-->
-   <%# end %>
-  <!-- アソシエーションができていないため、無理やりallでテスト表示。アソシエーションが終わったら@food.commentsに変更 -->
-  <%# @food.comments.each do |comment| %>
-    <%#= comment.impression %>
-  <%# end %>
-
-<%# end %>
-</div>

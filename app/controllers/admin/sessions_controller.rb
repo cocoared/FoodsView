@@ -28,7 +28,7 @@ class Admin::SessionsController < Devise::SessionsController
   before_action :configure_permitted_parameters, if: :devise_controller? #deviseに関するコントローラーの処理であれば,実行されるように設定。
 
   def after_sign_in_path_for(resource)
-    admin_foods_path
+    foods_path
   end
 
   protected

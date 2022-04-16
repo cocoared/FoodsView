@@ -5,16 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Admin.create!(
-  email: "admin@a",
-  password: "aaaaaa",
-)
+if Admin.exists?(email: "admin@a") == false
+  Admin.create!(
+    email: "admin@a",
+    password: "aaaaaa",
+  )
+end
 
 Tag.create!([
-    { name: '肉類' },
-    { name: '魚介類' },
-    { name: '野菜'},
-    { name: '調味料'},
-    { name: '麺類'},
-    { name: 'その他'}
+    { tag_name: '肉類' },
+    { tag_name: '魚介類' },
+    { tag_name: '野菜'},
+    { tag_name: '調味料'},
+    { tag_name: '麺類'},
+    { tag_name: 'その他'}
 ])

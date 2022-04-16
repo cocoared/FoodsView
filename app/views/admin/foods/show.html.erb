@@ -13,11 +13,20 @@
 
 <% if @food_exist.nil? %>
   <h2>Food New</h2>
-  <%= form_with model: @food, url: foods_path(item_code: params[:id]), method: :post do |f| %>
+  <%= form_with model: @food, url: admin_foods_path(item_code: params[:id]), method: :post do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
-    <%#= f.label :introduction %>
-    <%#= f.text_area :introduction, class: 'form-control' %>
+  <div class="check_box">
+    <span>タグ</span>
+    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+      <div>
+       <%= tag.label do %>
+       <%= tag.check_box %>
+       <%= tag.text %>
+       <% end %>
+      </div>
+    <% end %>
+ </div>
     <%= f.submit %>
   <% end %>
 <% else %>
@@ -26,12 +35,12 @@
   <!--<div>-->
     <%#= simple_format(@food_exist.introduction) %>
   <!--</div>-->
-  <h2>Comment</h2>
-  <%= form_with model: @comment, url: food_comments_path(@food_exist.id), method: :post do |f| %>
-    <%= f.label :impression %>
-    <%= f.text_area :impression, class: 'form-control' %>
-    <%= f.submit %>
-  <% end %>
+  <!--<h2>Comment</h2>-->
+  <%#= form_with model: @comment, url: food_comments_path(@food_exist.id), method: :post do |f| %>
+    <%#= f.label :impression %>
+    <%#= f.text_area :impression, class: 'form-control' %>
+    <%#= f.submit %>
+  <%# end %>
 
   <h3>Comments</h3>
   <% @comments.each do |comment| %>

@@ -25,9 +25,8 @@ class Admin::FoodsController < ApplicationController
     # binding.irb
 
   def show
-    # @foods = RakutenWebService::Ichiba::Item.search({itemCode: params[:id]})
+
     @food_detail = RakutenWebService::Ichiba::Item.search(itemCode: params[:id]).first
-    # @comment = Comment.new
     @food = Food.new
     @comment = Comment.new
     @food_exist = Food.find_by(item_code: params[:id]) # Food ga create saretereba sono record wo syutoku !
@@ -46,7 +45,7 @@ class Admin::FoodsController < ApplicationController
     # @food.genre_id = 1 # FIX ME
     @food.save
     # binding.irb
-    redirect_to admin_food_path(params[:item_code])
+    redirect_to food_path(params[:item_code])
   end
 
   private

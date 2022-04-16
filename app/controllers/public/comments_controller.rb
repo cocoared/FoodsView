@@ -9,6 +9,11 @@ class Public::CommentsController < ApplicationController
     # binding.irb
   end
 
+  # if comment.admin_id = current_admin.id
+  #   def destroy
+  #   end
+  # end
+
   private
   def comment_params
       params.require(:comment).permit(:impression)

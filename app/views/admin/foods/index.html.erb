@@ -1,27 +1,31 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9 col-sm-9">
-      <h4 class="bg-light text-center col-md-2 col-sm-2 my-3">食品一覧</h1>
-      <%= form_tag admin_foods_path, method: :get, class: 'boards__searchForm' do %>
-            <%= select_tag :tag_id,
-                           options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
-                           {
-                             prompt: 'タグで絞り込み検索',
-                             onchange: 'submit(this.form);'
-                           }
-            %>
-      <% end %>
+    <h4 class="bg-light text-center col-md-2 col-sm-2 my-3">食品一覧</h4>
     </div>
-  <div class="row">
-    <% @foods.each do |food| %>
-    <div class="col-md-3 col-sm-3 my-3">
+    <div class="col">
+    <%= form_tag admin_foods_path, method: :get, class: 'boards__searchForm' do %>
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
+        {
+         prompt: 'タグで絞り込み検索',
+         onchange: 'submit(this.form);'
+        }
+      %>
+    <% end %>
+    </div>
+    <% @arr.each do |food| %>
+    <div class="col-md-3 col-sm-4 my-3">
       <%= link_to admin_food_path(food['itemCode']), class: 'text-dark' do %>
         <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
-        <strong><%= food.name %></strong><br>
+        <strong>
+          <%= food.name %>
+        </strong><br>
+        <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
       <% end %>
-           </div>
+    </div>
     <% end %>
-  </div>
+    <%= paginate @foods_page %>
   </div>
 </div>
 

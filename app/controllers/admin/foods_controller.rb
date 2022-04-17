@@ -2,27 +2,32 @@ class Admin::FoodsController < ApplicationController
 
   def index
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
-
-    arr = @foods.map {|food| food} #配列の形成
+    @arr = @foods.map {|food| food} #配列の形成
 
     if params[:search].present?
       foods = food.items_serach(params[:search])
+
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      foods = @tag.foods.order(created_at: :desc)
+      # foods = @tag.foods.order(created_at: :desc)
+      item_codes = Food.joins(:tags).where(tags: {id: params[:tag_id]}).pluck(:item_code)
+      @arr = []
+      item_codes.each do |item_code|
+        @foods = RakutenWebService::Ichiba::Item.search(:itemCode => item_code)
+        @foods.map{|food| food}.each do |f|
+          @arr.append(f)
+        end
+      end
+
     else
       items = Food.all.order(created_at: :desc)
     end
 
     @tag_lists = Tag.all
-
-    @food_tags= params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Food.all
-
-    @foods_page = Kaminari.paginate_array(arr).page(params[:page]).per(10)
+    @food_tags= params[:tag_id].present? ? Tag.find(params[:tag_id]).foods : Food.all
+    @foods_page = Kaminari.paginate_array(@arr).page(params[:page]).per(10)
 
   end
-    # @foods = RakutenWebService::Ichiba::Genre[100316].search(keyword:  'Ruby')
-    # binding.irb
 
   def show
 
@@ -35,17 +40,14 @@ class Admin::FoodsController < ApplicationController
       @comments = Comment.where(food_id: @food_exist.id)
     end
 
-    # @food = Food.find(id: )
-    # binding.irb
+
   end
 
   def create
     @food = Food.new(food_params)
     @food.item_code = params[:item_code]
-    # @food.genre_id = 1 # FIX ME
     @food.save
-    # binding.irb
-    redirect_to food_path(params[:item_code])
+    redirect_to admin_food_path(params[:item_code])
   end
 
   private

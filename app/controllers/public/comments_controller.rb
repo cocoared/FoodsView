@@ -6,13 +6,7 @@ class Public::CommentsController < ApplicationController
     comment.food_id = params[:food_id]
     comment.save
     redirect_to food_path(food.item_code)
-    # binding.irb
   end
-
-  # if comment.admin_id = current_admin.id
-  #   def destroy
-  #   end
-  # end
 
   private
   def comment_params

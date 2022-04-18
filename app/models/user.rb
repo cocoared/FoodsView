@@ -20,7 +20,7 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user| #find_or_create_by(条件)  条件としたデータの検索と作成を自動的に判断して処理を行うメソッド
       user.password = SecureRandom.urlsafe_base64  #SecureRandom.urlsafe_base64  ランダムな文字列を生成するメソッド
-      user.name = "guestuser"
+      user.name = "ゲストユーザー"
     end
   end
 

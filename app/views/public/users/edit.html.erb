@@ -1,13 +1,17 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <h4>ユーザー情報編集</h4>
+    <div class="col-md-3 offset-4">
+      <h4>ユーザー情報編集</h4><br>
       <%= form_with(model:@user, local: true, method: :patch) do |f| %>
         <label for="user_name">ニックネーム</label><br>
+        <div></div>
         <%= f.text_field :name, autofocus: true, id:"user_name" %><br>
+        <div></div><br>
         <label for="user_image">プロフィール画像</label><br>
         <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %><br>
-        <%= f.submit "保存する" %>
+        <div></div><br>
+        <%= f.submit "保存する", class:"btn btn-success" %>
+        <%= link_to "退会する", users_unsubscribe_path,  class:"btn btn-danger" %>
       <% end %>
     </div>
   </div>

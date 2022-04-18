@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
 
   def withdraw #退会フラグを切り替える
     @user = current_user
-    @user.update(is_deletd: true) #is_deletedカラムの退会フラグを退会（true）に更新する
+    @user.update(is_deleted: true) #is_deletedカラムの退会フラグを退会（true）に更新する
     reset_session #ログアウトさせる
     flash[:notice] = "退会しました。"
     redirect_to root_path
@@ -42,7 +42,7 @@ class Public::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :profile_image)
   end
 
 end

@@ -1,6 +1,7 @@
 class Public::FoodsController < ApplicationController
 
   def index
+    @user = current_user
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
     @arr = @foods.map {|food| food} #配列の形成
 
@@ -25,9 +26,8 @@ class Public::FoodsController < ApplicationController
     @tag_lists = Tag.all
     @food_tags= params[:tag_id].present? ? Tag.find(params[:tag_id]).foods : Food.all
     @foods_page = Kaminari.paginate_array(@arr).page(params[:page]).per(10)
-
-
   end
+
 
   def show
     @food_detail = RakutenWebService::Ichiba::Item.search(itemCode: params[:id]).first
@@ -40,11 +40,20 @@ class Public::FoodsController < ApplicationController
     end
   end
 
+
   def create
     @food = Food.new(food_params)
     @food.item_code = params[:item_code]
     @food.save
     redirect_to food_path(params[:item_code])
+  end
+
+  def search
+  if params[:keyword].present?
+  @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+  @arr = @foods.map {|food| food} #配列の形成
+    foods = food.items_serach(params[:keyword])
+  end
   end
 
   private

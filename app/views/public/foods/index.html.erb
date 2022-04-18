@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-9 col-sm-9">
-    <h4 class="bg-light text-center col-md-2 col-sm-2 my-3">食品一覧</h4>
+    <div class="col-md-9 col-sm-9 my-4">
+
+      <%= image_tag @user.get_profile_image(50, 50) %>
+    	<strong><%= @user.name %></strong>
+    <h4 class="bg-light text-center col-md-4 col-sm-2 my-3">食品一覧</h4>
     </div>
+
     <div class="col">
     <%= form_tag foods_path, method: :get, class: 'boards__searchForm' do %>
       <%= select_tag :tag_id,
@@ -13,9 +17,11 @@
         }
       %>
     <% end %>
+    <%#= render 'search', foods: @foods %>
     </div>
+
     <% @arr.each do |food| %>
-    <div class="col-md-3 col-sm-4 my-3">
+    <div class="col-md-3 col-sm-4 ">
       <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
         <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
         <strong>

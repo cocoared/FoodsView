@@ -1,0 +1,33 @@
+<!--<p>検索</p>-->
+<!--<%#= form_tag(search_path,:method => 'get') do %>-->
+<!--  <%#= text_field_tag :search %>-->
+<!--  <%#= submit_tag 'Search', :name => nil %>-->
+<!--<%# end %>-->
+<%= form_tag foods_path, method: :get do  %>
+<%= label_tag :keyword, 'キーワード検索' %>
+<%= text_field_tag 'keyword', params[:keyword] %>
+<%= submit_tag "検索" %>
+<% end %>
+
+<table>
+<thead>
+<tr>
+<th>商品名</th>
+<th>画像</th>
+</tr>
+</thead>
+<tbody>
+<% if foods.present? %>
+<% @arr.each do |food| %>
+　<div class="col-md-3 col-sm-4 ">
+    <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
+      <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
+      <strong>
+        <%= food.name %>
+      </strong><br>
+    <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
+    <% end %>
+  </div>
+<% end %>
+<%= paginate @foods_page %>
+<% end %>

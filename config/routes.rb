@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :foods, only: [:index, :show] do
+    resources :foods, only: [:index, :show, :create] do
       resources :comments, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update]

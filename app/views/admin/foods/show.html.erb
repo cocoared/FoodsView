@@ -1,46 +1,59 @@
 <div class="container">
-<div class="row">
-  <div class="col-md-3">
-      <%= image_tag @food_detail["mediumImageUrls"][0], class: "food-image" %><br>
+  <div class="row">
+    <div class="col-md-3">
+        <%= image_tag @food_detail["mediumImageUrls"][0], class: "food-image" %><br>
+    </div>
+    <div class="col-md-9">
+      <%= @food_detail['itemCaption'] %>
+    </div>
   </div>
-  <div class="col-md-9">
-    <%= @food_detail['itemCaption'] %>
-  </div>
-</div>
 
-<% if @food_exist.nil? %>
-  <h2>品名</h2>
-  <%= form_with model: @food, url: admin_foods_path(item_code: params[:id]), method: :post do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name, class: 'form-control' %>
-  <div class="check_box">
-    <span>タグ</span>
-    <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
-      <div>
-       <%= tag.label do %>
-       <%= tag.check_box %>
-       <%= tag.text %>
-       <% end %>
-      </div>
+  <% if @food_exist.nil? %>
+    <h2>品名</h2>
+    <%= form_with model: @food, url: admin_foods_path(item_code: params[:id]), method: :post do |f| %>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    <div class="check_box">
+      <span>タグ</span>
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
+        <div>
+         <%= tag.label do %>
+         <%= tag.check_box %>
+         <%= tag.text %>
+         <% end %>
+        </div>
+      <% end %>
+   </div>
+      <%= f.submit %>
     <% end %>
- </div>
-    <%= f.submit %>
+  <% else %>
+    <h4>品名</h4>
+    <h5><%= @food_exist.name %></h5><br>
+  
+    <h3>コメント一覧</h3>
+    <% @comments.each do |comment| %>
+  
+      <div>
+        <%= simple_format(comment.impression) %>
+      </div>
+        <h4 class="mb-3">評価：<%= comment.rate %>点 </h4>
+        <div id="star-rate-<%= comment.id %>"></div>
+          <script>
+            $('#star-rate-<%= comment.id %>').raty({
+            　size: 36,
+              starOff:  '<%= asset_path('star-off.png') %>',
+              starOn : '<%= asset_path('star-on.png') %>',
+              starHalf: '<%= asset_path('star-half.png') %>',
+              half: true,
+              score: <%= comment.rate %>,
+              readOnly: true
+            });
+          </script>
+  
+      <div>
+      <%#= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn' %>
+      </div>
+    <%# end %>
+    <% end %>
   <% end %>
-<% else %>
-  <h4>品名</h4>
-  <h5><%= @food_exist.name %></h5><br>
-
-  <h3>コメント一覧</h3>
-  <% @comments.each do |comment| %>
-  <%#= form_tag({ controller: :comments, action: :destroy }, method: 'delete') do %>
-
-    <div>
-      <%= simple_format(comment.impression) %>
-    </div>
-    <div>
-    <%#= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn' %>
-    </div>
-  <%# end %>
-  <% end %>
-<% end %>
 </div>

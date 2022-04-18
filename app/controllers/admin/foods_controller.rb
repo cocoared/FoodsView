@@ -1,4 +1,5 @@
 class Admin::FoodsController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
@@ -18,9 +19,12 @@ class Admin::FoodsController < ApplicationController
           @arr.append(f)
         end
       end
+    
+     elsif params[:keyword].present?
+      @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+      @arr = @foods.map {|food| food} #配列の形成
+  
 
-    else
-      items = Food.all.order(created_at: :desc)
     end
 
     @tag_lists = Tag.all

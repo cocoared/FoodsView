@@ -1,12 +1,12 @@
 class Public::FoodsController < ApplicationController
-
+  before_action :authenticate_user!
   def index
     @user = current_user
     @foods = RakutenWebService::Ichiba::Item.search(:genreId => '100227')
     @arr = @foods.map {|food| food} #配列の形成
 
     if params[:search].present?
-      foods = food.items_serach(params[:search])
+      # foods = food.items_serach(params[:search])
 
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
@@ -19,8 +19,12 @@ class Public::FoodsController < ApplicationController
         end
       end
 
-    else
-      items = Food.all.order(created_at: :desc)
+    elsif params[:keyword].present?
+      @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+      @arr = @foods.map {|food| food} #配列の形成
+      # foods = food.items_serach(params[:keyword])
+
+      # items = Food.all.order(created_at: :desc)
     end
 
     @tag_lists = Tag.all
@@ -48,17 +52,11 @@ class Public::FoodsController < ApplicationController
     redirect_to food_path(params[:item_code])
   end
 
-  def search
-  if params[:keyword].present?
-  @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
-  @arr = @foods.map {|food| food} #配列の形成
-    foods = food.items_serach(params[:keyword])
-  end
-  end
+
 
   private
   def food_params
-      params.require(:food).permit(:name, :item_code, tag_ids: [])
+      params.require(:food).permit(:name, :item_code, {tag_ids: []})
   end
 
 end

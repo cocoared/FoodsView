@@ -17,19 +17,21 @@
         }
       %>
     <% end %>
-    <%#= render 'search', foods: @foods %>
+    <%= render 'search', foods: @foods %>
     </div>
 
     <% @arr.each do |food| %>
-    <div class="col-md-3 col-sm-4 ">
-      <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
-        <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
-        <strong>
-          <%= food.name %>
-        </strong><br>
-      <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
+      <% unless food["mediumImageUrls"].blank? %>
+        <div class="col-md-3 col-sm-4 ">
+          <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
+            <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
+            <strong>
+              <%= food.name %>
+            </strong><br>
+          <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
     <% end %>
     <%= paginate @foods_page %>
   </div>

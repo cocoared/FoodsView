@@ -1,4 +1,5 @@
 class Admin::CommentsController < ApplicationController
+
   def create
     food = Food.find(params[:food_id])
     comment = Comment.new(comment_params)
@@ -15,7 +16,7 @@ class Admin::CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:impression)
+    params.require(:comment).permit(:impression, :rate)
   end
 
 end

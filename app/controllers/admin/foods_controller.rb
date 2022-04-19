@@ -19,11 +19,11 @@ class Admin::FoodsController < ApplicationController
           @arr.append(f)
         end
       end
-    
+
      elsif params[:keyword].present?
       @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
       @arr = @foods.map {|food| food} #配列の形成
-  
+
 
     end
 

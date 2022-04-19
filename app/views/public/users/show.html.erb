@@ -21,9 +21,11 @@
       </tbody>
     </table>
   </div>
+  <% if @user.name != "ゲストユーザー" %>
   <div class="row">
     <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary offset-5" do %>
       <i class="fas fa-user-cog"></i>編集する
     <% end %>
   </div>
+  <% end %>
 </div>

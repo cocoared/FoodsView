@@ -29,10 +29,10 @@
   <% else %>
     <h4>品名</h4>
     <h5><%= @food_exist.name %></h5><br>
-  
+
     <h3>コメント一覧</h3>
     <% @comments.each do |comment| %>
-  
+
       <div>
         <%= simple_format(comment.impression) %>
       </div>
@@ -49,7 +49,7 @@
               readOnly: true
             });
           </script>
-  
+
       <div>
       <%#= link_to '削除', comment, method: :delete, data: { confirm: '本当に削除してもよろしいですか？' }, class: 'btn' %>
       </div>

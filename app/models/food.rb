@@ -3,7 +3,7 @@ class Food < ApplicationRecord
   # belongs_to :genre
   has_many :tagmaps, dependent: :destroy
   has_many :tags, through: :tagmaps
-  
+
 # def self.items_serach(search)
 #   food.where(['title LIKE ? OR content LIKE ?', "%#{search}%", "%#{search}%"])
 # end

@@ -1,13 +1,17 @@
 <h3>コメント一覧</h3>
     <% comments.each do |comment| %>
       <div>
-        <%= simple_format(comment.impression) %>
+        投稿者：<%= comment.user.name %>
       </div>
-        <h4 class="mb-3">評価：<%= comment.rate %>点 </h4>
+      <div>
+        <%= check_box_tag :comment %>
+        <%= comment.impression %>
+      </div>
+        <h5 class="mb-3">評価：<%= comment.rate %>点 </h5>
         <div id="star-rate-<%= comment.id %>"></div>
           <script>
             $('#star-rate-<%= comment.id %>').raty({
-            　size: 36,
+            　size: 30,
               starOff:  '<%= asset_path('star-off.png') %>',
               starOn : '<%= asset_path('star-on.png') %>',
               starHalf: '<%= asset_path('star-half.png') %>',

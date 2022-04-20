@@ -1,12 +1,12 @@
 class Admin::CommentsController < ApplicationController
 
   def create
-    food = Food.find(params[:food_id])
-    comment = Comment.new(comment_params)
-    #comment.admin_id = current_admin.id
-    comment.food_id = params[:food_id]
-    comment.save
-    redirect_to admin_food_path(food.item_code)
+    # food = Food.find(params[:food_id])
+    # comment = Comment.new(comment_params)
+    # #comment.admin_id = current_admin.id
+    # comment.food_id = params[:food_id]
+    # comment.save
+    # redirect_to admin_food_path(food.item_code)
   end
 
   def destroy
@@ -16,7 +16,7 @@ class Admin::CommentsController < ApplicationController
 
   private
   def comment_params
-    params.require(:comment).permit(:impression, :rate)
+    params.require(:comment).permit(:id, :impression, :rate)
   end
 
 end

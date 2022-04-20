@@ -22,9 +22,6 @@ class Public::FoodsController < ApplicationController
     elsif params[:keyword].present?
       @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
       @arr = @foods.map {|food| food} #配列の形成
-      # foods = food.items_serach(params[:keyword])
-
-      # items = Food.all.order(created_at: :desc)
     end
 
     @tag_lists = Tag.all

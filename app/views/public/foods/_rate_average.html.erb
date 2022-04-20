@@ -1,0 +1,23 @@
+<%
+fd = Food.find_by(item_code:  food['itemCode'] )
+if fd
+  score = fd.comments.average(:rate)
+else
+  score = 0
+end
+%>
+<div id="average-review-rating_<%= food['itemCode'].gsub(':','-') %>" data-score=<%= score %>></div>
+<!--itemCodeに一意性を持たせるために、置換メソッド（gsub)を使用-->
+
+<script>
+  $('#average-review-rating_<%= food['itemCode'].gsub(':','-') %>').raty({
+    readOnly: true,
+    size: 36,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
+</script>

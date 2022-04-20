@@ -7,25 +7,8 @@
       <%= @food_detail['itemCaption'] %>
     </div>
   </div>
-
   <% if @food_exist.nil? %>
-    <h2>品名</h2>
-    <%= form_with model: @food, url: foods_path(item_code: params[:id]), method: :post do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
-    <div class="check_box">
-      <span>タグ</span>
-      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :tag_name) do |tag| %>
-        <div>
-         <%= tag.label do %>
-         <%= tag.check_box %>
-         <%= tag.text %>
-         <% end %>
-        </div>
-      <% end %>
-   </div>
-      <%= f.submit %>
-    <% end %>
+  <%= render 'admin/foods/food_name', food: @food %>
   <% else %>
     <h4><strong>品名</strong></h4>
     <h5><%= @food_exist.name %></h5><br>
@@ -55,10 +38,6 @@
         </script>
         <%= f.submit "投稿"%>
     <% end %><br>
-
-
-
-
 
     <h4><strong>コメント一覧</strong></h4>
     <% @comments.each do |comment| %>

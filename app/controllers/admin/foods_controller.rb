@@ -6,7 +6,7 @@ class Admin::FoodsController < ApplicationController
     @arr = @foods.map {|food| food} #配列の形成
 
     if params[:search].present?
-      foods = food.items_serach(params[:search])
+      # foods = food.items_serach(params[:search])
 
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
@@ -20,11 +20,9 @@ class Admin::FoodsController < ApplicationController
         end
       end
 
-     elsif params[:keyword].present?
+    elsif params[:keyword].present?
       @foods = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
       @arr = @foods.map {|food| food} #配列の形成
-
-
     end
 
     @tag_lists = Tag.all

@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image]) #sign_up時にnameのデータ操作を許可している。
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image]) #sign_up時にnameとプロフィール画像のデータ操作を許可している。
   end
 
 end

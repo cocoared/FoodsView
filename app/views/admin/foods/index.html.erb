@@ -23,9 +23,11 @@
             <strong>
               <%= food.name %>
             </strong><br>
+            <%= render 'public/foods/rate_average', food: food %>
             <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
           <% end %>
         </div>
+
       <% end %>
     <% end %>
   </div>

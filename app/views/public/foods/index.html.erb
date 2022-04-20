@@ -28,20 +28,7 @@
             <strong>
               <%= food.name %>
             </strong><br>
-            <!--<div class="average-review-rating" data-score=<%#= food.average_rate %>></div>-->
-
-            <!--<script>-->
-            <!--  $('.average-review-rating').raty({-->
-            <!--    readOnly: true,-->
-            <!--    starOn: "<%#= asset_path('star-on.png') %>",-->
-            <!--    starOff: "<%#= asset_path('star-off.png') %>",-->
-            <!--    starHalf: "<%#= asset_path('star-half.png') %>",-->
-            <!--    score: function() {-->
-            <!--      return $(this).attr('data-score')-->
-            <!--    }-->
-            <!--  });-->
-            <!--</script>-->
-
+           <%= render 'rate_average', food: food %>
           <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
           <% end %>
         </div>

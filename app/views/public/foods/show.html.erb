@@ -38,26 +38,6 @@
         </script>
         <%= f.submit "投稿"%>
     <% end %><br>
-
-    <h4><strong>コメント一覧</strong></h4>
-    <% @comments.each do |comment| %>
-      <div>
-        投稿者：<%= comment.user.name %>
-        <%= simple_format(comment.impression) %>
-      </div>
-        <div class="mb-3">評価：<%= comment.rate %>点</div>
-        <div id="star-rate-<%= comment.id %>"></div>
-          <script>
-            $('#star-rate-<%= comment.id %>').raty({
-            　size: 36,
-              starOff:  '<%= asset_path('star-off.png') %>',
-              starOn : '<%= asset_path('star-on.png') %>',
-              starHalf: '<%= asset_path('star-half.png') %>',
-              half: true,
-              score: <%= comment.rate %>,
-              readOnly: true
-            });
-          </script><br>
-    <% end %>
+    <%= render 'admin/foods/comment_index', comments: @comments %>
   <% end %>
 </div>

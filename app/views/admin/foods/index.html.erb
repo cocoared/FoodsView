@@ -1,9 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-9 col-sm-9 my-4">
+    <div class="col-md-11 col-sm-11 my-4">
     <h4 class="bg-light text-center col-md-4 col-sm-2 my-3">食品一覧</h4>
-    </div>
-    <div class="col">
+    <%= render 'search', foods: @foods %><br>
     <%= form_tag admin_foods_path, method: :get, class: 'boards__searchForm' do %>
       <%= select_tag :tag_id,
         options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
@@ -13,8 +12,8 @@
         }
       %>
     <% end %>
-    <%= render 'search', foods: @foods %>
     </div>
+
     <% @arr.each do |food| %>
       <% unless food["mediumImageUrls"].blank? %>
         <div class="col-md-3 col-sm-4 my-3">
@@ -27,7 +26,6 @@
             <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>
           <% end %>
         </div>
-
       <% end %>
     <% end %>
   </div>

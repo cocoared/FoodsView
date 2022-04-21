@@ -20,4 +20,7 @@
               readOnly: true
             });
           </script>
+       <div align="right">
+          <%= link_to'コメントを削除', admin_food_comment_path(comment.food, comment), method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: "btn btn-danger" %>
+       </div>
     <% end %>

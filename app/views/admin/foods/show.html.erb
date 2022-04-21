@@ -15,8 +15,6 @@
     <h4>品名</h4>
     <h5><%= @food_exist.name %></h5><br>
     <%= render 'comment_index', comments: @comments %>
-    <div align="right">
-      <%= link_to'選択したコメントを削除', admin_food_comment_path(@comments), method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: "btn btn-danger" %>
-    </div>
+   
   <% end %>
 </div>

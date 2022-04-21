@@ -10,8 +10,9 @@ class Admin::CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find_by(id: params[:id], food_id: params[:food_id]).destroy
-    redirect_to admin_food_path(food.item_code)
+    # Comment.find_by(id: params[:id], food_id: params[:food_id]).destroy
+    Comment.find(params[:id]).destroy
+    redirect_to request.referer #同じページに遷移する
   end
 
   private

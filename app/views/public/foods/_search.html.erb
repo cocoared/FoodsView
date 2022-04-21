@@ -4,7 +4,6 @@
 <!--  <%#= submit_tag 'Search', :name => nil %>-->
 <!--<%# end %>-->
 <%= form_tag foods_path, method: :get do  %>
-<%= label_tag :keyword, 'キーワード検索' %>
-<%= text_field_tag 'keyword', params[:keyword] %>
+<%= text_field_tag :keyword, params[:keyword], placeholder: 'キーワードで検索' %>
 <%= submit_tag "検索" %>
 <% end %>

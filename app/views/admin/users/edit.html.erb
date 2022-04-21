@@ -12,11 +12,11 @@
          <div class="form-group">
            <%= f.label :id, "ユーザーID" %>
            <%= @user.id %><br>
-           <%= f.label :ニックネーム　 %>
-           <%= f.text_field :name, autofocus: true %><br>
+           <%= f.label :name, "ニックネーム" %>
+           <strong><%= @user.name %></strong><br>
 
-           <%= f.label :メールアドレス %>
-           <%= f.text_field :email %><br>
+           <%= f.label :メールアドレス  %>
+           <strong><%= @user.email %></strong><br>
 
            <%= f.label :ユーザーステータス %><br>
            <%= f.radio_button :is_deleted, false %>

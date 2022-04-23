@@ -1,10 +1,7 @@
 <h4><strong>コメント一覧</strong></h4>
     <% comments.each do |comment| %>
       <div>
-        投稿者：<%= comment.user.name %>
-      </div>
-      <div>
-        <%= check_box_tag :comment %>
+        投稿者：<%= comment.user.name %><div>  </div>
         <%= comment.impression %>
       </div>
         <div id="star-rate-<%= comment.id %>"></div>
@@ -20,7 +17,4 @@
             });
           </script>
         <h5 class="mb-3">評価：<%= comment.rate %>点 </h5>
-        <div align="right">
-          <%= link_to'コメントを削除', admin_food_comment_path(comment.food, comment), method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: "btn btn-danger" %>
-        </div>
     <% end %>

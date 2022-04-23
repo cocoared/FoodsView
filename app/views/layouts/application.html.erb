@@ -27,7 +27,7 @@
           <div button class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
           <!--管理者ログイン後のヘッダー-->
-              <% if admin_signed_in? %>
+              <% if admin_signed_in? && request.url.include?('/admin') %>
               <li>
                 <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
                  <i class="fas fa-sign-out-alt"></i>ログアウト

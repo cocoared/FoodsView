@@ -4,7 +4,9 @@
         投稿者：<%= comment.user.name %>
       </div>
       <div>
+        <% if current_admin %>
         <%= check_box_tag :comment %>
+        <% end %>
         <%= comment.impression %>
       </div>
         <h5 class="mb-3">評価：<%= comment.rate %>点 </h5>
@@ -20,7 +22,9 @@
               readOnly: true
             });
           </script>
-       <div align="right">
+        <% if current_admin %>
+        <div align="right">
           <%= link_to'コメントを削除', admin_food_comment_path(comment.food, comment), method: :delete, data: {confirm: '本当に削除してもよろしいですか？'}, class: "btn btn-danger" %>
-       </div>
+        </div>
+        <% end %>
     <% end %>

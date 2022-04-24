@@ -22,7 +22,7 @@
           <%= link_to food_path(food['itemCode']), class: 'text-dark' do %>
             <%= image_tag food["mediumImageUrls"][0], class: "food-image" %><br>
             <strong>
-              <%= food.name %>
+              <%= food.name.truncate(40) %>
             </strong><br>
            <%= render 'rate_average', food: food %>
           <%= "#{ Comment.where(food_id: Food.where(item_code: food.code).pluck(:id)).count}コメント" %>

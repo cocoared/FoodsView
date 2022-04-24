@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
-        <div class="line"><h1>ようこそ <strong>FoodsView</strong>へ!!</h1></div>
+        <div class="line anim js-anim3"><h1>ようこそ <strong>FoodsView</strong>へ!!</h1></div>
         <p>FoodsViewは食品専用のレビューサイトです！</p>
 
         <div class="btn-wrapper col-10 mx-auto">
@@ -23,3 +23,20 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(function(){
+    var $target3 = $('.js-anim3');
+
+    var anim3 = function() {
+      if(($target3).hasClass('is-animated')){
+        $target3.removeClass('is-animated');
+        // setTimeout(anim3, 3000)
+      } else {
+        $target3.addClass('is-animated');
+        // setTimeout(anim3, 3000)
+      }
+    }
+    anim3();
+  })
+  </script>

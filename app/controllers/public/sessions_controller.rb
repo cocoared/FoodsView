@@ -2,17 +2,21 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-  before_action :user_state, only: [:create]
+  before_action :user_state, only: [:create]  
+  #before_action :cehck_guest, only: [:new]
 
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+
+# GET /resource/sign_in   def new
+#     binding.irb
+#     super
+#     sign_out
+#   end
 
   # POST /resource/sign_in
   # def create
-  #   super
+    # binding.irb
+    # super
   # end
 
   # DELETE /resource/sign_out
@@ -26,14 +30,12 @@ class Public::SessionsController < Devise::SessionsController
     redirect_to foods_path
   end
 
-
-
-
-
   protected
 
   # 退会しているかを判断するメソッド
   def user_state
+    binding.irb
+
     ## 【処理内容1】 入力されたemailからアカウントを1件取得
     @user = User.find_by(email: params[:user][:email])
 

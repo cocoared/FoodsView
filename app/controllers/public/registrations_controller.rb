@@ -3,6 +3,11 @@
 class Public::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  def after_sign_up_path_for(resource)
+    flash[:notice] = '新規登録が完了しました。'
+    # binding.pry
+    foods_path
+  end
 
   # GET /resource/sign_up
   # def new
@@ -28,6 +33,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

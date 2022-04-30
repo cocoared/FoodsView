@@ -1,5 +1,5 @@
     <h2>品名</h2>
-    <%= form_with model: food, url: admin_foods_path(item_code: params[:id]), method: :post do |f| %>
+    <%= form_with model: food, url: foods_path(item_code: params[:id]), method: :post do |f| %>
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
       <div class="check_box">

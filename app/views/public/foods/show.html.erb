@@ -9,7 +9,7 @@
     </div>
   </div>
   <% if @food_exist.nil? %>
-  <%= render 'admin/foods/food_name', food: @food %>
+  <%= render 'food_name', food: @food %>
   <% else %>
     <h4><strong>品名</strong></h4>
     <h5><%= @food_exist.name %></h5><br>

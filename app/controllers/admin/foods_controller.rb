@@ -10,7 +10,6 @@ class Admin::FoodsController < ApplicationController
 
     elsif params[:tag_id].present?
       @tag = Tag.find(params[:tag_id])
-      # foods = @tag.foods.order(created_at: :desc)
       item_codes = Food.joins(:tags).where(tags: {id: params[:tag_id]}).pluck(:item_code)
       @arr = []
       item_codes.each do |item_code|
@@ -54,7 +53,7 @@ class Admin::FoodsController < ApplicationController
 
   private
   def food_params
-      params.require(:food).permit(:name, :item_code, tag_ids: [])
+      params.require(:food).permit(:name, :item_code, {tag_ids: []})
   end
 
 end

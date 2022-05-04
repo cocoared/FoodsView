@@ -34,14 +34,17 @@ Rails.application.routes.draw do
 
 
   scope module: "public" do
-    get  "/users/sign_out" => "sessions#destroy" #ログアウト
-    get "/users/my_page" => "users#show" #ユーザー情報詳細ページ（マイページ）表示
-    get "/users/unsubscribe" => "users#unsubscribe" #退会確認画面の表示
-    patch "/users/withdraw" => "users#withdraw" #退会フラグを切り替える
     resources :foods, only: [:index, :show, :create] do
       resources :comments, only: [:create, :destroy]
     end
-    resources :users, only: [:edit, :update]
+    resources :users, only: [:edit, :update] do
+      collection do
+        get  "/users/sign_out" => "sessions#destroy" #ログアウト
+        get "/users/my_page" => "users#show" #ユーザー情報詳細ページ（マイページ）表示
+        get "/users/unsubscribe" => "users#unsubscribe" #退会確認画面の表示
+        patch "/users/withdraw" => "users#withdraw" #退会フラグを切り替える
+      end
+    end
   end
 
 

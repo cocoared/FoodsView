@@ -29,6 +29,7 @@ class Public::UsersController < ApplicationController
   end
 
   def unsubscribe #退会確認画面の表示
+    @user = current_user
   end
 
   def withdraw #退会フラグを切り替える

@@ -1,7 +1,8 @@
-<h4><strong>コメント一覧</strong></h4>
+<h5><strong>コメント一覧</strong></h5>
     <% comments.each do |comment| %>
       <div>
-        投稿者：<%= comment.user.name %><div>  </div>
+        <font size = "2"><%= l comment.user.created_at, format: :short %></font><br>
+        <font size = "2"><%= comment.user.name %></font><br>
         <%= comment.impression %>
       </div>
         <div id="star-rate-<%= comment.id %>"></div>

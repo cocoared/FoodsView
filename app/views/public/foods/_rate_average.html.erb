@@ -1,13 +1,4 @@
-<%
-fd = Food.find_by(item_code:  food['itemCode'] )
-if fd
-  score = fd.comments.average(:rate)
-else
-  score = 0
-end
-%>
-
-<div id="average-review-rating_<%= food['itemCode'].gsub(':','-') %>" data-score=<%= score %>></div>
+<div id="average-review-rating_<%= food['itemCode'].gsub(':','-') %>" data-score=<%= score_average(food) %>></div>
 <!--itemCodeに一意性を持たせるために、置換メソッド（gsub)を使用-->
 <script>
   $('#average-review-rating_<%= food['itemCode'].gsub(':','-') %>').raty({
@@ -22,5 +13,5 @@ end
   });
 </script>
 <div>
-  平均<strong><%= score %></strong>点
+  平均<strong><%= score_average(food) %></strong>点
 </div>
